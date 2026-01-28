@@ -11,11 +11,12 @@
     <div class="flex items-start gap-4">
 
         <!-- LOGO -->
-        <img
-            src="{{ asset('images/logo-tawang.png') }}"
-            alt="Logo Padukuhan Tawang"
-            class="w-11 h-11 object-contain shrink-0"
-        >
+        <img 
+        src="{{ asset('assets/images/logo/Logo_Tawang.png') }}" 
+        alt="Logo Tawang"
+        class="h-10 w-10 object-contain"
+    />
+    
 
         <!-- TEKS -->
         <div class="leading-[1.15]">
