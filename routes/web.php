@@ -4,18 +4,33 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard / Beranda
+| Beranda
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
-    $potensi = [
-        ['judul' => 'Pertanian', 'deskripsi' => 'Lahan subur dan hasil tani warga.'],
-        ['judul' => 'UMKM', 'deskripsi' => 'Usaha makanan dan kerajinan lokal.'],
-        ['judul' => 'Budaya', 'deskripsi' => 'Gotong royong dan kegiatan sosial.'],
-    ];
-
-    return view('home', compact('potensi'));
+    return view('home');
 })->name('dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Beranda Detail Pages
+|--------------------------------------------------------------------------
+*/
+Route::get('/berita', function () {
+    return view('beranda.berita');
+})->name('berita');
+
+Route::get('/kegiatan', function () {
+    return view('beranda.kegiatan');
+})->name('kegiatan');
+
+Route::get('/visi-misi', function () {
+    return view('beranda.visi-misi');
+})->name('visi-misi');
+
+Route::get('/kontak', function () {
+    return view('beranda.kontak');
+})->name('kontak');
 
 
 /*

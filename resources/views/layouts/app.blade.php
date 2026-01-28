@@ -14,13 +14,36 @@
 
     <!-- Dark mode custom -->
     <style>
-        .dark {
-            background-color: #0f0f2d;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .dark aside {
-            background-color: #13124a;
+        
+        .animate-fade-in {
+            animation: fadeIn .7s ease-out forwards;
         }
-    </style>
+        @keyframes welcomeFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-welcome {
+    animation: welcomeFade 1s ease-out forwards;
+}
+        </style>
+        
 </head>
 
 <body id="app" class="bg-[#1c1b4b] overflow-x-hidden transition-colors">
@@ -92,6 +115,25 @@
             if (startX < 50 && endX > 150) toggleSidebar()
             if (startX > 150 && endX < 50) toggleSidebar()
         })
+        document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('welcomeOverlay')
+
+    if (!sessionStorage.getItem('welcomeShown')) {
+    sessionStorage.setItem('welcomeShown', 'true')
+} else {
+    document.getElementById('welcomeOverlay')?.remove()
+}
+
+    setTimeout(() => {
+        overlay.classList.add('opacity-0')
+        overlay.style.transition = 'opacity .6s ease'
+        
+        setTimeout(() => {
+            overlay.remove()
+        }, 600)
+
+    }, 2500)
+})
     </script>
 
 </body>
