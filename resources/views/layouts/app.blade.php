@@ -28,13 +28,13 @@
     {{-- NAVBAR (mobile) --}}
     @include('layouts.navbar')
 
-    {{-- OVERLAY --}}
+    {{-- OVERLAY (MOBILE ONLY) --}}
     <div id="overlay"
          onclick="toggleSidebar()"
-         class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden">
+         class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden md:hidden">
     </div>
 
-    <div class="flex min-h-screen">
+    <div class="flex min-h-screen relative">
         {{-- SIDEBAR --}}
         @include('layouts.sidebar')
 
@@ -52,14 +52,19 @@
 
         /* TOGGLE SIDEBAR (mobile) */
         function toggleSidebar() {
+            if (!sidebar || !overlay) return
+
             sidebar.classList.toggle('-translate-x-full')
             overlay.classList.toggle('hidden')
         }
 
         /* COLLAPSE SIDEBAR (desktop) */
         function collapseSidebar() {
+            if (!sidebar) return
+
             sidebar.classList.toggle('w-72')
             sidebar.classList.toggle('w-20')
+
             document.querySelectorAll('.sidebar-text')
                 .forEach(el => el.classList.toggle('hidden'))
         }
@@ -76,12 +81,14 @@
 
         /* SWIPE MOBILE */
         let startX = 0
+
         document.addEventListener('touchstart', e => {
             startX = e.touches[0].clientX
         })
 
         document.addEventListener('touchend', e => {
-            let endX = e.changedTouches[0].clientX
+            const endX = e.changedTouches[0].clientX
+
             if (startX < 50 && endX > 150) toggleSidebar()
             if (startX > 150 && endX < 50) toggleSidebar()
         })
